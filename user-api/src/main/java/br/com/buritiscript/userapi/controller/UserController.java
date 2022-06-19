@@ -2,6 +2,7 @@ package br.com.buritiscript.userapi.controller;
 
 import br.com.buritiscript.userapi.controller.responseDto.UserResponseDto;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
@@ -23,8 +24,18 @@ public class UserController {
         return userResponseDtos;
     }
 
-    public static List<UserResponseDto> userResponseDtos = new ArrayList<UserResponseDto>();
+    @GetMapping("/users/{cpf}")
+    public UserResponseDto getUsersFiltro(@PathVariable String cpf){
+        for (UserResponseDto userResponseDtoFiltro: userResponseDtos){
+            if (userResponseDtoFiltro.getCpf().equals(cpf)){
+                return userResponseDtoFiltro;
+            }
+        }
+        return null;
+    }
 
+
+    public static List<UserResponseDto> userResponseDtos = new ArrayList<UserResponseDto>();
 
     /*
     * @PostConstruct
