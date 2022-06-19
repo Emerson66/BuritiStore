@@ -1,10 +1,10 @@
 package br.com.buritiscript.userapi.controller.responseDto;
 
-import jdk.jfr.Timestamp;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+
 @Getter
 @Setter
 public class UserResponseDto {
@@ -13,7 +13,7 @@ public class UserResponseDto {
     private String endereco;
     private String email;
     private String telefone;
-    @Timestamp
+
     private Date dateCadastro;
 
     @Deprecated
