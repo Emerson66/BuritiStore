@@ -39,6 +39,17 @@ public class UserController {
         return userResponseDto;
     }
 
+    @DeleteMapping("/users/{cpf}")
+    public Boolean deletarUser(@PathVariable String cpf){
+        for (UserResponseDto userResponseDtoFiltro : userResponseDtos){
+            if (userResponseDtoFiltro.getCpf().equals(cpf)){
+                userResponseDtos.remove(userResponseDtoFiltro);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static List<UserResponseDto> userResponseDtos = new ArrayList<UserResponseDto>();
 
     /*
