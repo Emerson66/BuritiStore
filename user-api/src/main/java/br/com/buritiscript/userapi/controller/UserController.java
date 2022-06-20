@@ -50,6 +50,19 @@ public class UserController {
         return false;
     }
 
+    @PatchMapping("/users")
+    public Boolean atualizarUser(@RequestBody UserResponseDto userResponseDto){
+        String cpf = userResponseDto.getCpf();
+        for (UserResponseDto userResponseDtoObj : userResponseDtos){
+            if (userResponseDtoObj.getCpf().equals(cpf)){
+                userResponseDtoObj.toModel(userResponseDto);
+                return true;
+            }
+
+        }
+        return false;
+    }
+
     public static List<UserResponseDto> userResponseDtos = new ArrayList<UserResponseDto>();
 
     /*
