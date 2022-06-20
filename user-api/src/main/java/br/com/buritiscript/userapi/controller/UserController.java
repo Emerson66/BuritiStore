@@ -1,9 +1,7 @@
 package br.com.buritiscript.userapi.controller;
 
 import br.com.buritiscript.userapi.controller.responseDto.UserResponseDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -19,13 +17,13 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<UserResponseDto> getUsers(){
+    public List<UserResponseDto> listarUsers(){
 
         return userResponseDtos;
     }
 
     @GetMapping("/users/{cpf}")
-    public UserResponseDto getUsersFiltro(@PathVariable String cpf){
+    public UserResponseDto buscarUser(@PathVariable String cpf){
         for (UserResponseDto userResponseDtoFiltro: userResponseDtos){
             if (userResponseDtoFiltro.getCpf().equals(cpf)){
                 return userResponseDtoFiltro;
@@ -34,6 +32,12 @@ public class UserController {
         return null;
     }
 
+    @PostMapping("/users")
+    public UserResponseDto cadastrarUser(@RequestBody UserResponseDto userResponseDto){
+        userResponseDto.setDateCadastro(new Date());
+        userResponseDtos.add(userResponseDto);
+        return userResponseDto;
+    }
 
     public static List<UserResponseDto> userResponseDtos = new ArrayList<UserResponseDto>();
 
